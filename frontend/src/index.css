@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'GT Pressura Mono';
+  src:local('GT Pressura Mono'), url('./assets/fonts/GT_Pressura/GT-Pressura-Mono-Regular.woff2') format('woff2'),
+      url('./assets/fonts/GT_Pressura/GT-Pressura-Mono-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GT Pressura Mono';
+  src:local('GT Pressura Mono'), url('./assets/fonts/GT_Pressura/GT-Pressura-Mono-Light.woff2') format('woff2'),
+       url('./assets/fonts/GT_Pressura/GT-Pressura-Mono-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Vectrex';
+  src: local('Vectrex'), url('./assets/fonts/Vectrex/VectrexWeb-Bold.woff2') format('woff2'),
+        url('./assets/fonts/Vectrex/VectrexWeb-Bold.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --color-primary: rgb(84, 184, 245); 
+  --color-secondary: rgba(179, 187, 202); 
+  --color-background: rgb(17, 11, 11);
+  --color-hover: rgb(23, 29, 35);
+  --color-text: #ffffff; 
+
+  --color-warning: #D7AE20;
+  --color-success: #3DBB59;
+  --color-danger: #D65025;
+  --color-info: #1BAAB4;
+
+
+  --font-size-base: 16px;
+
+  --font-family-mono: 'GT Pressura Mono', monospace;
+  --font-family-mono-text: 'Vectrex', sans-serif;
+
+  font-family: var(--font-family-mono-text);
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--color-text);
+  background-color: var(--color-background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  font-size: var(--font-size-base, 16px);
+  min-width: 320px;
+  min-height: 100vh; 
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
