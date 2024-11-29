@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <Header />
-      <div className='max-w-[550px] m-auto'>
+      <div className='max-w-[550px] m-auto p-5'>
         <ErrorBoundary>
           <Routes>
             <Route path='/' element={<Home />} />

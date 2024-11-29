@@ -4,6 +4,7 @@ import { injected, metaMask, safe, walletConnect } from 'wagmi/connectors'
 import { WALLET_CONNECT_PROJECT_ID } from './constants/default'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import { createAppKit } from '@reown/appkit/react'
+import { createPublicClient } from 'viem'
 
 const projectId = WALLET_CONNECT_PROJECT_ID;
 
@@ -45,4 +46,13 @@ export const config = createConfig({
   transports: {
     [sepolia.id]: http(),
   },
+});
+
+
+export const account = '0x9fDD96fC016488d26d42361a3434a8F9F7233E5B'
+ 
+ 
+export const publicClient = createPublicClient({
+  chain: sepolia,
+  transport: http()
 })

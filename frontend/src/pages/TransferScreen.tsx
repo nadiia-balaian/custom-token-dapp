@@ -8,10 +8,11 @@ import { useSendTokens } from "@/hooks/useSendTokens";
 import { DEFAULT_TOKENS } from "@/constants/ui";
 import { DEFAULT_DECIMALS } from "@/constants/default";
 import { formatUnits } from "viem";
+import { useGasEstimation } from "@/hooks/useGasEstimation";
 
 export const TransferScreen: React.FC = () => {
   const [currentToken, setCurrentToken] = useState(DEFAULT_TOKENS[0]);
-  const [recipient, setRecipient] = useState("");
+  const [recipient, setRecipient] = useState<`0x${string}`>('0x');
   const [amount, setAmount] = useState("");
   const { address, isConnected } = useAccount();
 
@@ -30,12 +31,19 @@ export const TransferScreen: React.FC = () => {
 
   useEffect(() => {
     if (hash) {
-      setRecipient("");
+      setRecipient("" as `0x${string}`);
       setAmount("");
     }
   }, [hash]);
 
   const isDisabled = !recipient || !amount || isPending || !isConnected;
+
+
+  const { formattedGasData } = useGasEstimation({
+    recipient,
+    amount,
+    tokenAddress: currentToken.tokenAddress,
+  });
 
   return (
     <div>
@@ -56,7 +64,7 @@ export const TransferScreen: React.FC = () => {
 
         <InputField
           value={recipient}
-          onChange={(e) => setRecipient(e.target.value)}
+          onChange={(e) => setRecipient(e.target.value.trim() as `0x${string}`)}
           placeholder="Recipient Address"
           ariaLabel="recipient"
         />
@@ -66,6 +74,13 @@ export const TransferScreen: React.FC = () => {
           placeholder="Amount"
           ariaLabel="amount"
         />
+
+        <div>
+          Estimated fee:{" "}
+          <span className="text-primary"> {Number(formattedGasData).toLocaleString(undefined, {
+            maximumFractionDigits: 8,
+          })} </span>
+        </div>
         <button
           aria-disabled={isDisabled}
           onClick={handleSend}
