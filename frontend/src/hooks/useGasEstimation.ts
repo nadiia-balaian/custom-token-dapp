@@ -6,9 +6,9 @@ import { account, publicClient } from "@/wagmi";
 import { DEFAULT_DECIMALS, INFURA_ID } from "@/constants/default";
 
 interface UseGasEstimationProps {
-  recipient: `0x${string}`;
+  recipient: string;
   amount: string;
-  tokenAddress: `0x${string}`;
+  tokenAddress: string;
 }
 
 // EIP-1559
@@ -45,7 +45,7 @@ export const useGasEstimation = ({ recipient, amount, tokenAddress }: UseGasEsti
           const estimatedGas = await publicClient.estimateGas({
             account,
             data: encodedData,
-            to: tokenAddress,
+            to: tokenAddress as `0x${string}`,
             value: 0n, // No ETH being transferred
           });
 
@@ -54,7 +54,7 @@ export const useGasEstimation = ({ recipient, amount, tokenAddress }: UseGasEsti
 
           const formattedFee = ethers.formatEther(totalFee);
           console.log(`Total Fee: ${formattedFee} ETH`);
-          
+
           setFormattedGasData(formattedFee);
         } catch (error) {
           console.error("Error estimating gas:", error);

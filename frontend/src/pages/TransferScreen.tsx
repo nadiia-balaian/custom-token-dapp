@@ -12,7 +12,7 @@ import { useGasEstimation } from "@/hooks/useGasEstimation";
 
 export const TransferScreen: React.FC = () => {
   const [currentToken, setCurrentToken] = useState(DEFAULT_TOKENS[0]);
-  const [recipient, setRecipient] = useState<`0x${string}`>('0x');
+  const [recipient, setRecipient] = useState<string>('');
   const [amount, setAmount] = useState("");
   const { address, isConnected } = useAccount();
 
@@ -26,7 +26,7 @@ export const TransferScreen: React.FC = () => {
       : "0";
 
   const handleSend = () => {
-    sendTokens(recipient as `0x${string}`, amount, DEFAULT_DECIMALS);
+    sendTokens(recipient, amount, DEFAULT_DECIMALS);
   };
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export const TransferScreen: React.FC = () => {
 
         <InputField
           value={recipient}
-          onChange={(e) => setRecipient(e.target.value.trim() as `0x${string}`)}
+          onChange={(e) => setRecipient(e.target.value.trim())}
           placeholder="Recipient Address"
           ariaLabel="recipient"
         />
